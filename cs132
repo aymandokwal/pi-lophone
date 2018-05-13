@@ -4,6 +4,14 @@
 # Description: Creating a working basic calculator.
 ######################################################################
 from Tkinter import *
+import RPi.GPIO as GPIO
+from time import sleep, time
+import pygame
+
+
+
+
+DEBUG = False
 
 # the main GUI class 
 class MainGUI(Frame):
@@ -32,7 +40,7 @@ class MainGUI(Frame):
         button = Button(self, bg="white",\
         borderwidth=0, highlightthickness=0,\
         activebackground="red", command=lambda:\
-         self.process("("))
+         self.process("red"))
 
         # set the button's image 
 
@@ -102,53 +110,10 @@ class MainGUI(Frame):
     # processes button presses 
     def process(self, button):
 
-
-        # AC clears the display 
-        if (button == "AC"):
-            # clear the display 
-            self.display["text"] = ""
-
-
-       # = starts an evaluation of whatever is on the display 
-        elif (button == "="):
-              # get the expression in the display 
-              expr = self.display["text"] 
-              # the evaluation may return an error!
-              try:
-                    # evaluate the expression 
-                    result = eval(expr)
-                    # store the result to the display 
-                    self.display["text"] = str(result)
-
-                    # makes it so that whenever the text is longer than 14 characters
-                    if len(self.display["text"])>(14):
-                        # it truncates any result more than 14 to 11 characters and ...
-                        self.display["text"] = self.display["text"][:11]+"..."
-
-              # handle if an error occurs during evaluation 
-              except:
-              # note the error in the display
-                  self.display["text"] = "ERROR"
-
-        # otherwise, just tack on the appropriate
-        #  operand/operator 
-
-
-
-        # adds a back button
-        elif (button == "BS"):
-            if len(self.display["text"]) > (0):
-                self.display["text"] = self.display["text"][:-1]
- 
-        else:
-            self.display["text"] += button
-   
-        # makes it so that the user cannot add more than 14 characters
-        if len(self.display["text"])>(14):
-            self.display["text"] = self.display["text"][:14]
-                
-    
-
+        if (button == "red"):
+            pygame.init()
+            pygame.mixer.Sound("red1.wav")
+            pygame.mixer.play()
 
 ##############################
 # the main part of the program
