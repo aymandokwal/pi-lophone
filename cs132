@@ -7,8 +7,10 @@ from Tkinter import *
 import RPi.GPIO as GPIO
 from time import sleep, time
 import pygame
-
-
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17,GPIO.OUT)
+GPIO.output(17,GPIO.LOW)
 
 
 DEBUG = False
@@ -31,76 +33,67 @@ class MainGUI(Frame):
         for row in range(10):
              Grid.rowconfigure(self, row, weight=1)
         # there are 8 columns 
-        for col in range(8):
+        for col in range(30):
              Grid.columnconfigure(self, col, weight=1)
         
-
-        # next, create the button (white background, no border,
-        #  no highlighting, no color when clicked) 
-        button = Button(self, bg="white",\
-        borderwidth=0, highlightthickness=0,\
-        activebackground="red", command=lambda:\
-         self.process("red"))
-
         # set the button's image 
 
         # put the button in its proper row and column
-        img = PhotoImage(file="red.png")
+        img = PhotoImage(file="red1.png")
         button = Button(self, bg="white",image=img, borderwidth=0, highlightthickness=0,\
-        activebackground="white", command=lambda:\
-         self.process(")"))
+        activebackground="white", command=lambda: self.process("red"))
         button.image = img
-        button.grid(row=4, column=0, sticky=N+S+E+W)
+        button.grid(row=4, column=11, sticky=N+S+E+W)
         # the same is done for the rest of the buttons
 
-        img = PhotoImage(file="orange.png")
+        img = PhotoImage(file="orange1.png")
         button = Button(self, bg="white",image=img, borderwidth=0, highlightthickness=0,\
         activebackground="white", command=lambda:\
-         self.process(")"))
+         self.process("orange"))
         button.image = img
-        button.grid(row=4, column=1, sticky=N+S+E+W)
+        button.grid(row=4, column=12, sticky=N+S+E+W)
 
-        img = PhotoImage(file="yellow.png")
+        img = PhotoImage(file="yellow1.png")
         button = Button(self, bg="white",image=img, borderwidth=0, highlightthickness=0,\
         activebackground="white", command=lambda:\
-         self.process(")"))
+         self.process("yellow"))
         button.image = img
-        button.grid(row=4, column=2, sticky=N+S+E+W)
+        button.grid(row=4, column=13, sticky=N+S+E+W)
 
-        img = PhotoImage(file="green.png")
+        img = PhotoImage(file="green1.png")
         button = Button(self, bg="white",image=img, borderwidth=0, highlightthickness=0,\
         activebackground="white", command=lambda:\
-         self.process(")"))
+         self.process("green"))
         button.image = img
-        button.grid(row=4, column=3, sticky=N+S+E+W)
+        button.grid(row=4, column=14, sticky=N+S+E+W)
 
-        img = PhotoImage(file="lightblue.png")
+        img = PhotoImage(file="aqua1.png")
         button = Button(self, bg="white",image=img, borderwidth=0, highlightthickness=0,\
         activebackground="white", command=lambda:\
-         self.process(")"))
+         self.process("aqua"))
         button.image = img
-        button.grid(row=4, column=4, sticky=N+S+E+W)
+        button.grid(row=4, column=15, sticky=N+S+E+W)
 
-        img = PhotoImage(file="blue.png")
+        img = PhotoImage(file="lightblue1.png")
         button = Button(self, bg="white",image=img, borderwidth=0, highlightthickness=0,\
         activebackground="white", command=lambda:\
-         self.process(")"))
+         self.process("lightblue"))
         button.image = img
-        button.grid(row=4, column=5, sticky=N+S+E+W)
+        button.grid(row=4, column=16, sticky=N+S+E+W)
 
-        img = PhotoImage(file="violet.png")
+        img = PhotoImage(file="blue1.png")
         button = Button(self, bg="white",image=img, borderwidth=0, highlightthickness=0,\
         activebackground="white", command=lambda:\
-         self.process(")"))
+         self.process("blue"))
         button.image = img
-        button.grid(row=4, column=6, sticky=N+S+E+W)
+        button.grid(row=4, column=17, sticky=N+S+E+W)
 
-        img = PhotoImage(file="pink.png")
+        img = PhotoImage(file="violet1.png")
         button = Button(self, bg="white",image=img, borderwidth=0, highlightthickness=0,\
         activebackground="white", command=lambda:\
-         self.process(")"))
+         self.process("violet"))
         button.image = img
-        button.grid(row=4, column=7, sticky=N+S+E+W)
+        button.grid(row=4, column=18, sticky=N+S+E+W)
 
         
 
@@ -112,8 +105,71 @@ class MainGUI(Frame):
 
         if (button == "red"):
             pygame.init()
-            pygame.mixer.Sound("red1.wav")
-            pygame.mixer.play()
+
+
+            sound = pygame.mixer.Sound ("red2.wav")
+            sound.play()
+
+
+        elif (button == "orange"):
+            pygame.init()
+
+
+            sound = pygame.mixer.Sound ("orange2.wav")
+            sound.play()
+
+
+        elif (button == "yellow"):
+            pygame.init()
+
+
+            sound = pygame.mixer.Sound ("yellow2.wav")
+            sound.play()
+
+
+        elif (button == "green"):
+            pygame.init()
+
+
+            sound = pygame.mixer.Sound ("green2.wav")
+            sound.play()
+
+
+        elif (button == "aqua"):
+            pygame.init()
+
+
+            sound = pygame.mixer.Sound ("lightblue2.wav")
+            sound.play()
+
+
+        elif (button == "lightblue"):
+            pygame.init()
+
+
+            sound = pygame.mixer.Sound ("blue2.wav")
+            sound.play()
+
+
+        elif (button == "blue"):
+            pygame.init()
+
+
+            sound = pygame.mixer.Sound ("violet2.wav")
+            sound.play()
+
+
+        elif (button == "violet"):
+            pygame.init()
+
+
+            sound = pygame.mixer.Sound ("pink2.wav")
+            sound.play()
+
+# detect Ctrl+C
+if KeyboardInterrupt:
+    # reset the GPIO pins
+    GPIO.cleanup()
 
 ##############################
 # the main part of the program
@@ -121,7 +177,7 @@ class MainGUI(Frame):
 # create the window 
 window = Tk()
 # set the window title 
-window.title("The Reckoner")
+window.title("The Pi-lophone")
 # generate the GUI 
 p = MainGUI(window)
 # display the GUI and wait for user interaction 
