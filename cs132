@@ -7,11 +7,9 @@ from Tkinter import *
 import RPi.GPIO as GPIO
 from time import sleep, time
 import pygame
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(17,GPIO.OUT)
-GPIO.output(17,GPIO.LOW)
 
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 
 DEBUG = False
 
@@ -29,15 +27,14 @@ class MainGUI(Frame):
         
         # configure the rows and columns of the Frame to adjust
         #  to the window
-        # there are 1 row 
+        # there are 10 rows 
         for row in range(10):
              Grid.rowconfigure(self, row, weight=1)
-        # there are 8 columns 
+        # there are 30 columns 
         for col in range(30):
              Grid.columnconfigure(self, col, weight=1)
         
         # set the button's image 
-
         # put the button in its proper row and column
         img = PhotoImage(file="red1.png")
         button = Button(self, bg="white",image=img, borderwidth=0, highlightthickness=0,\
@@ -105,71 +102,86 @@ class MainGUI(Frame):
 
         if (button == "red"):
             pygame.init()
-
-
             sound = pygame.mixer.Sound ("red2.wav")
             sound.play()
 
+            GPIO.setup(17, GPIO.OUT)
+            GPIO.output(17, GPIO.HIGH)
+            sleep (.5)
+            GPIO.output(17, GPIO.LOW)
 
         elif (button == "orange"):
             pygame.init()
-
-
             sound = pygame.mixer.Sound ("orange2.wav")
             sound.play()
-
+            
+            GPIO.setup(6, GPIO.OUT)
+            GPIO.output(6, GPIO.HIGH)
+            sleep (.5)
+            GPIO.output(6, GPIO.LOW)
 
         elif (button == "yellow"):
             pygame.init()
-
-
             sound = pygame.mixer.Sound ("yellow2.wav")
             sound.play()
+
+            GPIO.setup(17, GPIO.OUT)
+            GPIO.output(17, GPIO.HIGH)
+            sleep (.5)
+            GPIO.output(17, GPIO.LOW)
 
 
         elif (button == "green"):
             pygame.init()
-
-
             sound = pygame.mixer.Sound ("green2.wav")
             sound.play()
+
+            GPIO.setup(17, GPIO.OUT)
+            GPIO.output(17, GPIO.HIGH)
+            sleep (.5)
+            GPIO.output(17, GPIO.LOW)
 
 
         elif (button == "aqua"):
             pygame.init()
-
-
             sound = pygame.mixer.Sound ("lightblue2.wav")
             sound.play()
+
+            GPIO.setup(17, GPIO.OUT)
+            GPIO.output(17, GPIO.HIGH)
+            sleep (.5)
+            GPIO.output(17, GPIO.LOW)
 
 
         elif (button == "lightblue"):
             pygame.init()
-
-
             sound = pygame.mixer.Sound ("blue2.wav")
             sound.play()
 
+            GPIO.setup(17, GPIO.OUT)
+            GPIO.output(17, GPIO.HIGH)
+            sleep (.5)
+            GPIO.output(17, GPIO.LOW)
 
         elif (button == "blue"):
             pygame.init()
-
-
             sound = pygame.mixer.Sound ("violet2.wav")
             sound.play()
 
-
+            GPIO.setup(17, GPIO.OUT)
+            GPIO.output(17, GPIO.HIGH)
+            sleep (.5)
+            GPIO.output(17, GPIO.LOW)
+            
         elif (button == "violet"):
             pygame.init()
-
-
             sound = pygame.mixer.Sound ("pink2.wav")
             sound.play()
 
-# detect Ctrl+C
-if KeyboardInterrupt:
-    # reset the GPIO pins
-    GPIO.cleanup()
+            GPIO.setup(17, GPIO.OUT)
+            GPIO.output(17, GPIO.HIGH)
+            sleep (.5)
+            GPIO.output(17, GPIO.LOW)
 
 ##############################
 # the main part of the program
